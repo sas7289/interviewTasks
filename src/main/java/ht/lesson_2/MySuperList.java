@@ -1,4 +1,4 @@
-package lesson_2;
+package ht.lesson_2;
 
 public interface MySuperList<T> {
     void add(T t);

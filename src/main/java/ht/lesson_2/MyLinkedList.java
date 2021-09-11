@@ -1,4 +1,4 @@
-package lesson_2;
+package ht.lesson_2;
 
 public class MyLinkedList<T> implements MySuperList<T> {
 
@@ -8,14 +8,12 @@ public class MyLinkedList<T> implements MySuperList<T> {
 
     @Override
     public void add(T t) {
-        Node<T> temp = new Node<>(t);
-        if (size == 0) {
-            head = temp;
-            tail = temp;
+        Node<T> temp = tail;
+        tail = new Node<>(temp, t, null);
+        if (temp == null) {
+            head = tail;
         } else {
-            tail.setNext(temp);
-            temp.setPrev(tail);
-            tail = temp;
+            temp.setNext(tail);
         }
         size++;
     }
@@ -31,6 +29,12 @@ public class MyLinkedList<T> implements MySuperList<T> {
             temp.getNext().setPrev(temp.getPrev());
             size--;
             return temp.getValue();
+        }
+
+        if(head == tail) {
+            head = null;
+            tail = null;
+            size--;
         }
 
         if (temp == head) {
@@ -82,6 +86,12 @@ public class MyLinkedList<T> implements MySuperList<T> {
         private Node<T> prev;
         private Node<T> next;
 
+        public Node(Node<T> prev, T value, Node<T> next) {
+            this.prev = prev;
+            this.next = next;
+            this.value = value;
+        }
+
         private T value;
 
         public Node(T value) {
@@ -118,7 +128,7 @@ public class MyLinkedList<T> implements MySuperList<T> {
         StringBuilder builder = new StringBuilder();
         Node<T> temp = head;
         for (int i = 0; i < size; i++) {
-            builder.append(temp.getValue() + " ");
+            builder.append(temp.getValue()).append(" ");
             temp = temp.getNext();
         }
         return builder.toString();

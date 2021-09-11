@@ -1,8 +1,9 @@
-package lesson_2;
+package ht.lesson_2;
 
 public class AppList {
     public static void main(String[] args) {
         MySuperList<Integer> myList = new MyLinkedList<>();
+//        MySuperList<Integer> myList = new MyArrayList<>();
         System.out.println("size " + myList.size());
         myList.add(1);
         myList.add(2);
