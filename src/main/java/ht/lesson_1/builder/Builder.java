@@ -1,4 +1,4 @@
-package lesson_1.builder;
+package ht.lesson_1.builder;
 
 public interface Builder {
     Builder firstName(String firstName);

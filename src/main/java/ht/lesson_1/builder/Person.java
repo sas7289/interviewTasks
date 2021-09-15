@@ -1,4 +1,4 @@
-package lesson_1.builder;
+package ht.lesson_1.builder;
 
 public class Person {
     private String firstName;
@@ -9,6 +9,9 @@ public class Person {
     private String phone;
     private int age;
     private String gender;
+
+    public Person() {
+    }
 
     public Person(String firstName, String lastName, String middleName, String country, String address, String phone, int age, String gender) {
         this.firstName = firstName;
@@ -51,5 +54,63 @@ public class Person {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+
+    public  static class Builder {
+        private final Person person = new Person();
+
+        private Builder() {
+        }
+
+        public Builder firstName(String firstName) {
+            person.setFirstName(firstName);
+            return this;
+        }
+
+        public Builder lastName(String lastName) {
+            person.setLastName(lastName);
+            return this;
+        }
+
+        public Person build() {
+            return person;
+        }
     }
 }
