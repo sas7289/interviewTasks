@@ -14,6 +14,12 @@ public class Counter {
         lock.unlock();
     }
 
+    public void decrementCounter() {
+        lock.lock();
+        counter--;
+        lock.unlock();
+    }
+
     public int getCounter() {
         return counter;
     }

@@ -26,7 +26,7 @@ public class App {
         });
         Thread thread2 = new Thread(() -> {
             for (int i = 0; i < 1000; i++) {
-                counter.incrementCounter();
+                counter.decrementCounter();
             }
         });
         thread1.start();
@@ -37,6 +37,6 @@ public class App {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(counter.getCounter());
+        System.out.println("Result:" + counter.getCounter());
     }
 }
