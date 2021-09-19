@@ -40,6 +40,7 @@ values ('09:00', '13:00', 200),
 insert into movie_grid (session_beg, session_end, film_id)
 values ('09:00', '11:35', 1),
        ('11:00', '12:51', 2),
+       ('12:52', '14:44', 2),
        ('14:00', '16:35', 1),
        ('17:00', '18:47', 3),
        ('19:00', '20:55', 4),
@@ -54,7 +55,8 @@ select distinct mg.film_id,
                 mg2.session_end as cross_end
 from movie_grid as mg
          join movie_grid as mg2 on (mg.session_end > mg2.session_beg) and (mg.session_beg < mg2.session_end) and
-                                   (mg.session_beg <> mg2.session_beg) and (mg.session_beg < mg2.session_beg);
+                                   (mg.session_beg <> mg2.session_beg) and (mg.session_beg < mg2.session_beg)
+order by mg.session_beg;
 
 
 
