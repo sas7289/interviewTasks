@@ -47,12 +47,12 @@ values ('09:00', '11:35', 1),
        ('21:30', '00:05', 1),
        ('00:00', '01:51', 2);
 
-select distinct mg.film_id,
-                mg.session_beg,
-                mg.session_end,
-                mg2.film_id     as cross_id,
-                mg2.session_beg as cross_beg,
-                mg2.session_end as cross_end
+select distinct mg.film_id      as "фильм 1",
+                mg.session_beg  as "время начала фильма 1",
+                mg.session_end  as "время окончания фильма 1",
+                mg2.film_id     as "фильм 2",
+                mg2.session_beg as "время начала фильма 2",
+                mg2.session_end as "время окончания фильма 2"
 from movie_grid as mg
          join movie_grid as mg2 on (mg.session_end > mg2.session_beg) and (mg.session_beg < mg2.session_end) and
                                    (mg.session_beg <> mg2.session_beg) and (mg.session_beg < mg2.session_beg)
