@@ -53,8 +53,8 @@ select distinct mg.film_id,
                 mg2.session_beg as cross_beg,
                 mg2.session_end as cross_end
 from movie_grid as mg
-         join movie_grid as mg2 on (mg.session_end > mg2.session_beg and mg.session_beg < mg2.session_end) and
-                                   (mg.session_beg <> mg2.session_beg);
+         join movie_grid as mg2 on (mg.session_end > mg2.session_beg) and (mg.session_beg < mg2.session_end) and
+                                   (mg.session_beg <> mg2.session_beg) and (mg.session_beg < mg2.session_beg);
 
 
 
