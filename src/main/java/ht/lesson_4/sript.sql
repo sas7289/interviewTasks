@@ -42,10 +42,10 @@ values ('09:00', '11:35', 1),
        ('11:00', '12:51', 2),
        ('12:52', '14:44', 2),
        ('14:00', '16:35', 1),
-       ('17:00', '18:47', 3),
-       ('19:00', '20:55', 4),
-       ('21:30', '00:05', 1),
-       ('00:00', '01:51', 2);
+       ('17:10', '18:57', 3),
+       ('19:10', '21:05', 4),
+       ('21:45', '00:20', 1),
+       ('00:15', '02:06', 2);
 
 -- Первый вариант задания 1
 select distinct mg.film_id      as "фильм 1",
@@ -64,25 +64,27 @@ from movie_grid as mg
          join films as f on mg.film_id = f.id;
 
 -- Второй вариант задания 1
-select temp.film_id, temp.dur, temp.f2_id, temp.f2_beg from (
-                                                                select mg.film_id,
-                                                                       mg.session_beg + f.duration as dur,
-                                                                       mg2.film_id                 as f2_id,
-                                                                       mg2.session_beg             as f2_beg
-                                                                from movie_grid as mg
-                                                                         join films as f on mg.film_id = f.id
-                                                                         join movie_grid as mg2 on mg.id + 1 = mg2.id
-
-                                                            ) as temp where (dur > f2_beg);
+select temp.film_id, temp.dur, temp.f2_id, temp.f2_beg
+from (
+         select mg.film_id,
+                mg.session_beg + f.duration as dur,
+                mg2.film_id                 as f2_id,
+                mg2.session_beg             as f2_beg
+         from movie_grid as mg
+                  join films as f on mg.film_id = f.id
+                  join movie_grid as mg2 on mg.id + 1 = mg2.id
+     ) as temp
+where (dur > f2_beg);
 
 -- Задание 1
-select temp.film_id, temp.dur, temp.f2_id, temp.f2_beg from (
-                                                                select mg.film_id,
-                                                                       mg.session_beg + f.duration as dur,
-                                                                       mg2.film_id                 as f2_id,
-                                                                       mg2.session_beg             as f2_beg
-                                                                from movie_grid as mg
-                                                                         join films as f on mg.film_id = f.id
-                                                                         join movie_grid as mg2 on mg.id + 1 = mg2.id
-
-                                                            ) as temp where (f2_beg - dur) > '00:30' ;
+select temp.film_id, temp.dur, temp.f2_id, temp.f2_beg, temp.f2_beg - temp.dur as break
+from (
+         select mg.film_id,
+                mg.session_beg + f.duration as dur,
+                mg2.film_id                 as f2_id,
+                mg2.session_beg             as f2_beg
+         from movie_grid as mg
+                  join films as f on mg.film_id = f.id
+                  join movie_grid as mg2 on mg.id + 1 = mg2.id
+     ) as temp
+where (f2_beg - dur) > '00:30' order by break desc;
