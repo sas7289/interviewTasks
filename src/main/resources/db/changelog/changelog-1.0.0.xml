@@ -10,7 +10,7 @@
         http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd ">
 
     <changeSet id="init" author="Aleksandr Shakhoff">
-        <createTable tableName="student_by_liquibase">
+        <createTable tableName="students">
             <column name="id" type="uuid">
                 <constraints primaryKey="true"/>
             </column>
