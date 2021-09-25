@@ -23,6 +23,40 @@ public class App {
 
     public static void main(String[] args) throws DatabaseException {
         List<Student> all = Repository.findAll();
-        System.out.println(all.get(0));
+        System.out.println("Студенты вначале:");
+        for (Student student1 : all) {
+            System.out.println(student1.getName());
+        }
+
+        Student student = new Student();
+        student.setName("testAdd");
+        student.setMark(4);
+        student.setId(UUID.randomUUID());
+        Repository.add(student);
+
+        System.out.println("Студенты после добавления:");
+        all = Repository.findAll();
+        for (Student student1 : all) {
+            System.out.println(student1.getName());
+        }
+
+        Student temp = all.get(0);
+        UUID id = temp.getId();
+        Student studentById = Repository.findById(id);
+        System.out.println("Студент по id: " + studentById.getName());
+
+        studentById.setName("Changed name");
+
+        Repository.update(studentById);
+        studentById = Repository.findById(id);
+        System.out.println("Студент по id после сохранения изменений: " + studentById.getName());
+
+        Repository.removeById(id);
+
+        all = Repository.findAll();
+        System.out.println("Студенты после удаления:");
+        for (Student student1 : all) {
+            System.out.println(student1.getName());
+        }
     }
 }
